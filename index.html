@@ -33,31 +33,31 @@
   }
 
   .message {
-    font-size: 1.3em;
-    margin: 20px 0;
+    font-size: 1.2em;
+    margin: 15px 0;
   }
 
   .photo {
-    width: 170px;
-    height: 220px;
-    border-radius: 15px;
+    width: 200px;
+    height: 260px;
+    border-radius: 20px;
     object-fit: cover;
     border: 4px solid white;
-    box-shadow: 0 0 20px rgba(255, 0, 102, 0.6);
+    box-shadow: 0 0 20px rgba(255, 0, 102, 0.7);
     margin: 15px 0;
     animation: glow 2s infinite alternate;
   }
 
   @keyframes glow {
-    from { box-shadow: 0 0 10px rgba(255, 0, 102, 0.4); }
-    to { box-shadow: 0 0 25px rgba(255, 0, 102, 0.9); }
+    from { box-shadow: 0 0 10px rgba(255, 0, 102, 0.5); }
+    to { box-shadow: 0 0 30px rgba(255, 0, 102, 1); }
   }
 
   button {
     border: none;
     border-radius: 40px;
-    padding: 15px 35px;
-    font-size: 1.2em;
+    padding: 14px 35px;
+    font-size: 1.1em;
     cursor: pointer;
     transition: all 0.4s ease;
   }
@@ -93,15 +93,15 @@
 
 <body>
 
-<!-- Romantic Background Music -->
-<audio autoplay loop>
+<!-- Romantic Music -->
+<audio id="music" autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2f14b9feca.mp3?filename=romantic-piano-146970.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
   <h1>Hey Summm ❤️</h1>
 
-  <img src="YOUR_IMAGE_URL_HERE" class="photo">
+  <img src="Romantic close-up of a couple.png" class="photo">
 
   <p class="message">
     From the moment you came into my life,  
@@ -125,7 +125,7 @@
 <div class="container final" id="final">
   <h1>You chose YES 😭❤️</h1>
 
-  <img src="YOUR_IMAGE_URL_HERE" class="photo">
+  <img src="Romantic close-up of a couple.png" class="photo">
 
   <p class="message">
     Thank you for choosing me.  
@@ -171,7 +171,6 @@ function noClicked() {
   }
   if (noCount === 3) {
     noBtn.style.opacity = "0.2";
-    yesBtn.style.zIndex = "10";
   }
 }
 
@@ -184,4 +183,3 @@ function yesClicked() {
 
 </body>
 </html>
-
