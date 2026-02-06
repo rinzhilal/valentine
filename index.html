@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Summm  ❤️</title>
+<title>For Summm ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -21,43 +21,54 @@ body{
   top:50%;
   transform:translateY(-50%);
   padding:20px;
-  animation:fade 1.2s ease;
+  animation:fade 1s ease;
 }
 
 @keyframes fade{
-  from{opacity:0;transform:translateY(40px);}
+  from{opacity:0;transform:translateY(20px);}
   to{opacity:1;transform:translateY(-50%);}
 }
 
 h1,h2,p{color:#8b0033;}
-
 .message{font-size:1.25em;min-height:70px;}
 
 button{
   border:none;
   border-radius:50px;
   padding:14px 38px;
-  font-size:1.15em;
+  font-size:1.1em;
   cursor:pointer;
   transition:.45s;
 }
 
-#yesBtn{background:#ff3366;color:white;z-index:5;position:relative;}
-#noBtn{background:white;color:#ff3366;margin-left:10px;}
+#yesBtn{
+  background:#ff3366;
+  color:white;
+  z-index:10;
+  position:relative;
+}
+
+#noBtn{
+  background:white;
+  color:#ff3366;
+  margin-left:10px;
+}
 
 .letter{
-  max-width:680px;
+  max-width:720px;
   margin:auto;
-  font-size:1.1em;
+  font-size:1.05em;
   line-height:1.7em;
   background:rgba(255,255,255,.55);
   padding:25px;
   border-radius:20px;
+  height:60vh;
+  overflow-y:auto;
 }
 
 .photo{
-  width:190px;
-  height:250px;
+  width:200px;
+  height:auto;
   border-radius:20px;
   border:4px solid white;
   box-shadow:0 0 25px rgba(255,0,120,.8);
@@ -69,7 +80,7 @@ button{
 
 <body>
 
-<audio autoplay loop>
+<audio id="bgm" loop>
 <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2f14b9feca.mp3?filename=romantic-piano-146970.mp3">
 </audio>
 
@@ -85,11 +96,9 @@ button{
 <!-- PAGE 2 -->
 <div class="container hidden" id="page2">
 <h1>For You ❤️</h1>
-
 <div class="letter" id="letter"></div>
-
 <br>
-<button id="surpriseBtn" onclick="goFinal()">Ready for Surprise 💝</button>
+<button onclick="goFinal()">Ready for Surprise 💝</button>
 </div>
 
 <!-- PAGE 3 -->
@@ -110,20 +119,21 @@ let noCount=0;
 const msg=document.getElementById("msg");
 const noBtn=document.getElementById("noBtn");
 const yesBtn=document.getElementById("yesBtn");
+const music=document.getElementById("bgm");
 
 function noClicked(){
   noCount++;
   if(noCount===1) msg.innerHTML="Are you sure Summm? 🥺";
   else if(noCount===2) msg.innerHTML="Wanna rethink? 🥹💞";
   else if(noCount===3) msg.innerHTML="I'm waiting for your YES ❤️";
-  else msg.innerHTML="You have no option but YES 😌💕";
+  else msg.innerHTML="You have no option but pressing YES 😌💕";
 
-  yesBtn.style.transform=`scale(${1+noCount*0.45})`;
-  noBtn.style.transform=`scale(${1-noCount*0.25})`;
+  yesBtn.style.transform=`scale(${1+noCount*0.35})`;
+  noBtn.style.transform=`scale(${1-noCount*0.2})`;
 }
 
 const letterText = `
-I don’t even know when loving u became a habit… it just happened…  
+I don’t even know when loving u became a habit… it just happened….  
 u r there when I wake up, u r there before I sleep, and u r there even in my sleep…  
 Every quiet moment of my day carries u in it.
 
@@ -133,30 +143,31 @@ and I smile like an idiot without even realizing it.
 From one unexpected matrimony notification to daily chats, calls, and this connection…  
 nothing about us was planned, yet everything feels right.
 
-I won’t lie … I’m scared sometimes.  
+I won’t lie …I’m scared sometimes.  
 Not of loving u, but of losing u...
 
 Because I don’t just want u in my days…  
 I want my life beside u…  
 Learning with u, observing u, caring for u, loving u …  
-growing together, quietly and deeply…
+growing together, quietly and deeply….
 
 u r not just someone I love…  
-u r someone I choose, every single day…
+u r someone I choose, every single day….
 
-the days the nights even the sleep may get bored without u…  
-it may sound cringe but actually u in my story is lovely than without u…
+Summ…to b frank this is worst fear i have now !!!  
+am afraid every second that what if i lost u…  
+i wont say that i wont live without u… but it would b difficult…
 
 in sha allah i hope may allah unite us in here and hereafter…  
-  
 
 Penne nikk anne othiri ishtta ❤️
 `;
 
 function goLetter(){
+  music.play();
   page1.classList.add("hidden");
   page2.classList.remove("hidden");
-  typeWriter(letterText,"letter",25);
+  typeWriter(letterText,"letter",22);
 }
 
 function goFinal(){
