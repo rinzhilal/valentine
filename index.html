@@ -23,41 +23,32 @@
     animation: fadeIn 1.3s ease;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(-50%); }
-  }
-
   h1, h2, p {
     color: #8b0033;
   }
 
   .message {
-    font-size: 1.2em;
-    margin: 15px 0;
+    font-size: 1.3em;
+    margin: 20px 0;
+    min-height: 60px;
   }
 
   .photo {
-    width: 200px;
-    height: 260px;
-    border-radius: 20px;
+    width: 180px;
+    height: 240px;
+    border-radius: 15px;
     object-fit: cover;
     border: 4px solid white;
-    box-shadow: 0 0 20px rgba(255, 0, 102, 0.7);
-    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(255, 0, 102, 0.6);
+    margin: 20px 0;
     animation: glow 2s infinite alternate;
-  }
-
-  @keyframes glow {
-    from { box-shadow: 0 0 10px rgba(255, 0, 102, 0.5); }
-    to { box-shadow: 0 0 30px rgba(255, 0, 102, 1); }
   }
 
   button {
     border: none;
     border-radius: 40px;
-    padding: 14px 35px;
-    font-size: 1.1em;
+    padding: 15px 35px;
+    font-size: 1.2em;
     cursor: pointer;
     transition: all 0.4s ease;
   }
@@ -65,12 +56,19 @@
   #yesBtn {
     background: #ff3366;
     color: white;
+    z-index: 5;
+    position: relative;
   }
 
   #noBtn {
     background: white;
     color: #ff3366;
     margin-left: 15px;
+    position: relative;
+  }
+
+  .final {
+    display: none;
   }
 
   .rose {
@@ -85,38 +83,21 @@
     to { transform: translateY(110vh) rotate(360deg); }
   }
 
-  .final {
-    display: none;
-  }
 </style>
 </head>
 
 <body>
 
-<!-- Romantic Music -->
-<audio id="music" autoplay loop>
+<audio autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2f14b9feca.mp3?filename=romantic-piano-146970.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
   <h1>Hey Summm ❤️</h1>
 
-  <img src="Romantic close-up of a couple.png" class="photo">
-
-  <p class="message">
-    From the moment you came into my life,  
-    everything felt warmer, softer, brighter.  
-    You’re not just someone I love…  
-    you’re someone my heart chose without hesitation.
+  <p class="message" id="msg">
+    Will you be my Valentine? 💖
   </p>
-
-  <p class="message">
-    Your smile calms me.  
-    Your voice stays with me.  
-    Your presence feels like home.
-  </p>
-
-  <h2>Summm… will you be my Valentine? 💖</h2>
 
   <button id="yesBtn" onclick="yesClicked()">YES 💘</button>
   <button id="noBtn" onclick="noClicked()">NO 🙈</button>
@@ -145,10 +126,11 @@
 
 <script>
 let noCount = 0;
+const msg = document.getElementById("msg");
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-function createRoses(count = 25) {
+function createRoses(count = 40) {
   for (let i = 0; i < count; i++) {
     const rose = document.createElement("div");
     rose.className = "rose";
@@ -164,20 +146,30 @@ createRoses();
 
 function noClicked() {
   noCount++;
-  if (noCount <= 3) {
-    alert("Are you sure, Summm? 🥺 Please rethink...");
-    noBtn.style.transform = `scale(${1 - noCount * 0.25})`;
-    yesBtn.style.transform = `scale(${1 + noCount * 0.35})`;
+
+  if (noCount === 1) {
+    msg.innerHTML = "Are you sure, Summm? 🥺";
   }
-  if (noCount === 3) {
-    noBtn.style.opacity = "0.2";
+  else if (noCount === 2) {
+    msg.innerHTML = "Wanna rethink? 🥹💞";
   }
+  else if (noCount === 3) {
+    msg.innerHTML = "I’m waiting for you to click YES ❤️";
+  }
+  else {
+    msg.innerHTML = "You have no other option than pressing YES 😌💕";
+  }
+
+  yesBtn.style.transform = `scale(${1 + noCount * 0.4})`;
+  noBtn.style.transform = `scale(${1 - noCount * 0.25})`;
+
+  yesBtn.style.zIndex = "20";
 }
 
 function yesClicked() {
   document.getElementById("main").style.display = "none";
   document.getElementById("final").style.display = "block";
-  createRoses(80);
+  createRoses(100);
 }
 </script>
 
