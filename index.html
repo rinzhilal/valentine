@@ -6,170 +6,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle, #ffdde1, #ee9ca7);
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-    text-align: center;
-  }
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  text-align:center;
+  overflow:hidden;
+}
 
-  .container {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 25px;
-    animation: fadeIn 1.3s ease;
-  }
+.container{
+  position:absolute;
+  width:100%;
+  top:50%;
+  transform:translateY(-50%);
+  padding:20px;
+  animation:fade 1.2s ease;
+}
 
-  h1, h2, p {
-    color: #8b0033;
-  }
+@keyframes fade{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(-50%);}
+}
 
-  .message {
-    font-size: 1.3em;
-    margin: 20px 0;
-    min-height: 60px;
-  }
+h1,h2,p{color:#8b0033;}
 
-  .photo {
-    width: 180px;
-    height: 240px;
-    border-radius: 15px;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 0 20px rgba(255, 0, 102, 0.6);
-    margin: 20px 0;
-    animation: glow 2s infinite alternate;
-  }
+.message{font-size:1.25em;min-height:70px;}
 
-  button {
-    border: none;
-    border-radius: 40px;
-    padding: 15px 35px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
+button{
+  border:none;
+  border-radius:50px;
+  padding:14px 38px;
+  font-size:1.15em;
+  cursor:pointer;
+  transition:.45s;
+}
 
-  #yesBtn {
-    background: #ff3366;
-    color: white;
-    z-index: 5;
-    position: relative;
-  }
+#yesBtn{background:#ff3366;color:white;z-index:5;position:relative;}
+#noBtn{background:white;color:#ff3366;margin-left:10px;}
 
-  #noBtn {
-    background: white;
-    color: #ff3366;
-    margin-left: 15px;
-    position: relative;
-  }
+.letter{
+  max-width:680px;
+  margin:auto;
+  font-size:1.1em;
+  line-height:1.7em;
+  background:rgba(255,255,255,.55);
+  padding:25px;
+  border-radius:20px;
+}
 
-  .final {
-    display: none;
-  }
+.photo{
+  width:190px;
+  height:250px;
+  border-radius:20px;
+  border:4px solid white;
+  box-shadow:0 0 25px rgba(255,0,120,.8);
+}
 
-  .rose {
-    position: fixed;
-    top: -50px;
-    font-size: 26px;
-    animation: fall linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes fall {
-    to { transform: translateY(110vh) rotate(360deg); }
-  }
-
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
 <audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2f14b9feca.mp3?filename=romantic-piano-146970.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2f14b9feca.mp3?filename=romantic-piano-146970.mp3">
 </audio>
 
-<div class="container" id="main">
-  <h1>Hey Summm ❤️</h1>
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+<h1>Hey Summm ❤️</h1>
+<p class="message" id="msg">Will you be my Valentine? 💖</p>
 
-  <p class="message" id="msg">
-    Will you be my Valentine? 💖
-  </p>
-
-  <button id="yesBtn" onclick="yesClicked()">YES 💘</button>
-  <button id="noBtn" onclick="noClicked()">NO 🙈</button>
+<button id="yesBtn" onclick="goLetter()">YES 💘</button>
+<button id="noBtn" onclick="noClicked()">NO 🙈</button>
 </div>
 
-<div class="container final" id="final">
-  <h1>You chose YES 😭❤️</h1>
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+<h1>For You ❤️</h1>
 
-  <img src="Romantic close-up of a couple.png" class="photo">
+<div class="letter" id="letter"></div>
 
-  <p class="message">
-    Thank you for choosing me.  
-    Thank you for being you.  
-    Loving you is my favorite feeling in the world.
-  </p>
+<br>
+<button id="surpriseBtn" onclick="goFinal()">Ready for Surprise 💝</button>
+</div>
 
-  <p class="message">
-    I promise to care for you,  
-    to laugh with you,  
-    to stand beside you — always.
-  </p>
+<!-- PAGE 3 -->
+<div class="container hidden" id="page3">
+<h1>My Forever ❤️</h1>
 
-  <h2>Happy Valentine’s Day, Summm 💕  
-  — Yours, Rinz 🌹</h2>
+<img src="Romantic close-up of a couple.png" class="photo">
+
+<p class="message">
+“You are not just my love… you are my home, my peace, my forever.” 💕
+</p>
+
+<h2>Happy Advance Valentine’s Day Summm 💖</h2>
 </div>
 
 <script>
-let noCount = 0;
-const msg = document.getElementById("msg");
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
+let noCount=0;
+const msg=document.getElementById("msg");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
 
-function createRoses(count = 40) {
-  for (let i = 0; i < count; i++) {
-    const rose = document.createElement("div");
-    rose.className = "rose";
-    rose.innerHTML = Math.random() > 0.5 ? "🌹" : "❤️";
-    rose.style.left = Math.random() * 100 + "vw";
-    rose.style.animationDuration = (2 + Math.random() * 3) + "s";
-    document.body.appendChild(rose);
-    setTimeout(() => rose.remove(), 6000);
-  }
-}
-
-createRoses();
-
-function noClicked() {
+function noClicked(){
   noCount++;
+  if(noCount===1) msg.innerHTML="Are you sure Summm? 🥺";
+  else if(noCount===2) msg.innerHTML="Wanna rethink? 🥹💞";
+  else if(noCount===3) msg.innerHTML="I'm waiting for your YES ❤️";
+  else msg.innerHTML="You have no option but YES 😌💕";
 
-  if (noCount === 1) {
-    msg.innerHTML = "Are you sure, Summm? 🥺";
-  }
-  else if (noCount === 2) {
-    msg.innerHTML = "Wanna rethink? 🥹💞";
-  }
-  else if (noCount === 3) {
-    msg.innerHTML = "I’m waiting for you to click YES ❤️";
-  }
-  else {
-    msg.innerHTML = "You have no other option than pressing YES 😌💕";
-  }
-
-  yesBtn.style.transform = `scale(${1 + noCount * 0.4})`;
-  noBtn.style.transform = `scale(${1 - noCount * 0.25})`;
-
-  yesBtn.style.zIndex = "20";
+  yesBtn.style.transform=`scale(${1+noCount*0.45})`;
+  noBtn.style.transform=`scale(${1-noCount*0.25})`;
 }
 
-function yesClicked() {
-  document.getElementById("main").style.display = "none";
-  document.getElementById("final").style.display = "block";
-  createRoses(100);
+const letterText = `
+I don’t even know when loving u became a habit… it just happened…  
+u r there when I wake up, u r there before I sleep, and u r there even in my sleep…  
+Every quiet moment of my day carries u in it.
+
+I catch myself opening Instagram just to c u every post, every picture  
+and I smile like an idiot without even realizing it.
+
+From one unexpected matrimony notification to daily chats, calls, and this connection…  
+nothing about us was planned, yet everything feels right.
+
+I won’t lie … I’m scared sometimes.  
+Not of loving u, but of losing u...
+
+Because I don’t just want u in my days…  
+I want my life beside u…  
+Learning with u, observing u, caring for u, loving u …  
+growing together, quietly and deeply…
+
+u r not just someone I love…  
+u r someone I choose, every single day…
+
+the days the nights even the sleep may get bored without u…  
+it may sound cringe but actually u in my story is lovely than without u…
+
+in sha allah i hope may allah unite us in here and hereafter…  
+  
+
+Penne nikk anne othiri ishtta ❤️
+`;
+
+function goLetter(){
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
+  typeWriter(letterText,"letter",25);
+}
+
+function goFinal(){
+  page2.classList.add("hidden");
+  page3.classList.remove("hidden");
+}
+
+function typeWriter(text,id,speed){
+  let i=0;
+  document.getElementById(id).innerHTML="";
+  let timer=setInterval(()=>{
+    document.getElementById(id).innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(timer);
+  },speed);
 }
 </script>
 
